@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('angular-login.grandfather', ['ui.router', 'templates-app'])
+angular.module('organizationApp.grandfather', ['ui.router', 'templates-app'])
   .config(function($stateProvider) {
     $stateProvider
       .state('app', {

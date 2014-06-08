@@ -22,7 +22,7 @@ angular.module('organizationApp.register', ['organizationApp.grandfather'])
       // xhr is departing
       $scope.xhr = true;
       $http.post('/user', $scope.registerObj)
-        .success(function(data, status, headers, config) {
+        .success(function(data) {
           console.info('post success - ', data);
           $scope.xhr = false;
           $scope.redirect = true;
@@ -30,8 +30,8 @@ angular.module('organizationApp.register', ['organizationApp.grandfather'])
             $state.go('app.home');
           }, 2000);
         })
-        .error(function(data, status, headers, config) {
-          data.errors.forEach(function(error, index, array) {
+        .error(function(data) {
+          data.errors.forEach(function(error) {
             formInstance[error.field].$error[error.name] = true;
           });
           formInstance.$setPristine();
