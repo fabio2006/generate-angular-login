@@ -59,17 +59,15 @@
    */
   function buildAccessLevels(accessLevelDeclarations, userRoles) {
 
-    var accessLevels = {},
-      resultBitMask,
-      role;
+    var accessLevels = {};
     for (var level in accessLevelDeclarations) {
 
       if (typeof accessLevelDeclarations[level] === 'string') {
         if (accessLevelDeclarations[level] === '*') {
 
-          resultBitMask = '';
-
-          for (role in userRoles) {
+          var resultBitMask = '';
+          /*jshint unused:false*/
+          for (var role in userRoles) {
             /*jshint quotmark: double*/
             resultBitMask += "1";
           }
@@ -83,17 +81,18 @@
         }
       } else {
 
-        resultBitMask = 0;
-        for (role in accessLevelDeclarations[level]) {
-          if (userRoles.hasOwnProperty(accessLevelDeclarations[level][role])) {
-            resultBitMask = resultBitMask || userRoles[accessLevelDeclarations[level][role]].bitMask;
+        var resultBitMask2 = 0;
+        for (var role2 in accessLevelDeclarations[level]) {
+          if (userRoles.hasOwnProperty(accessLevelDeclarations[level][role2])) {
+            /*jshint bitwise: false*/
+            resultBitMask2 = resultBitMask2 | userRoles[accessLevelDeclarations[level][role2]].bitMask;
           } else {
-            console.log("Access Control Error: Could not find role '" + accessLevelDeclarations[level][role] + "' in registered roles while building access for '" + level + "'");
+            console.log("Access Control Error: Could not find role '" + accessLevelDeclarations[level][role2] + "' in registered roles while building access for '" + level + "'");
           }
         }
         accessLevels[level] = {
-          bitMask: resultBitMask,
-          title: accessLevelDeclarations[level][role]
+          bitMask: resultBitMask2,
+          title: accessLevelDeclarations[level][role2]
         };
       }
     }

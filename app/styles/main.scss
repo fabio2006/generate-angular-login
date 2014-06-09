@@ -91,7 +91,10 @@ body {
 .login-error.active {
   height: 50px;
 }
-
+.loading-jumbo {
+  text-align: center;
+  cursor: progress;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 1024px) {
     .container {

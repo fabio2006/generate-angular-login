@@ -7,7 +7,7 @@ angular.module('organizationApp.register', ['organizationApp.grandfather'])
         url: '/register',
         templateUrl: 'templates/register.tpl.html',
         controller: 'RegisterController',
-        accessLevel: accessLevels.anon
+        accessLevel: accessLevels.public
       });
   })
   .controller('RegisterController', function($scope, $http, $timeout, $state) {
