@@ -40,7 +40,8 @@ angular.module('loginService', [])
 
       var managePermissions = function() {
         // Register routing function.
-        $rootScope.$on('$stateChangeStart', function(event, to, toParams) {
+        /*jshint unused:false*/
+        $rootScope.$on('$stateChangeStart', function(event, to, toParams, from, fromParams) {
 
           /**
            * $stateChangeStart is a synchronous check to the accessLevels property
@@ -63,7 +64,8 @@ angular.module('loginService', [])
           // if the state has undefined accessLevel, anyone can access it.
           // NOTE: if `wrappedService.userRole === undefined` means the service still doesn't know the user role,
           // we need to rely on grandfather resolve, so we let the stateChange success, for now.
-          if (to.accessLevel === undefined || to.accessLevel.bitMask && wrappedService.userRole.bitMask) {
+          /*jshint bitwise: false*/
+          if (to.accessLevel === undefined || to.accessLevel.bitMask & wrappedService.userRole.bitMask) {
             angular.noop(); // requested state can be transitioned to.
           } else {
             event.preventDefault();
@@ -93,7 +95,7 @@ angular.module('loginService', [])
            * You can use the value of redirectMap, based on the value of the rejection
            * So you can setup DIFFERENT redirections based on different promise errors.
            */
-          var redirectObj;
+          var errorObj, redirectObj;
           // in case the promise given to resolve function is an $http request
           // the error is a object containing the error and additional informations
           error = (typeof error === 'object') ? error.status.toString() : error;
@@ -140,7 +142,8 @@ angular.module('loginService', [])
        * High level, public methods
        */
       var wrappedService = {
-        loginHandler: function(user) {
+        /*jshint unused:false*/
+        loginHandler: function(user, status, headers, config) {
           /**
            * Custom logic to manually set userRole goes here
            *
@@ -169,7 +172,7 @@ angular.module('loginService', [])
         loginUser: function(httpPromise) {
           httpPromise.success(this.loginHandler);
         },
-        logoutUser: function() {
+        logoutUser: function(httpPromise) {
           /**
            * De-registers the userToken remotely
            * then clears the loginService as it was on startup
@@ -189,10 +192,11 @@ angular.module('loginService', [])
           httpPromise.success(self.loginHandler);
 
           httpPromise.then(
-            function success() {
+            function success(httpObj) {
               self.doneLoading = true;
               // duplicated logic from $stateChangeStart, slightly different, now we surely have the userRole informations.
-              if (pendingState.to.accessLevel === undefined || pendingState.to.accessLevel.bitMask && self.userRole.bitMask) {
+              /*jshint bitwise: false*/
+              if (pendingState.to.accessLevel === undefined || pendingState.to.accessLevel.bitMask & self.userRole.bitMask) {
                 checkUser.resolve();
               } else {
                 checkUser.reject('unauthorized');

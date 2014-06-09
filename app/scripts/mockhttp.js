@@ -96,10 +96,13 @@ angular.module('organizationApp.mock', ['ngMockE2E'])
     };
 
     // fakeLogin
-    $httpBackend.when('POST', '/login').respond(function(method, url, data) {
+    /*jshint unused:false*/
+    $httpBackend.when('POST', '/login').respond(function(method, url, data, headers) {
+      /*jshint unused:false*/
       var postData = angular.fromJson(data),
         user = userStorage[postData.username],
-        newToken;
+        newToken,
+        tokenObj;
       $log.info(method, '->', url);
 
       if (angular.isDefined(user) && user.password === postData.password) {
@@ -163,7 +166,8 @@ angular.module('organizationApp.mock', ['ngMockE2E'])
     });
 
     // fakeRegister
-    $httpBackend.when('POST', '/user').respond(function(method, url, data) {
+    /*jshint unused:false*/
+    $httpBackend.when('POST', '/user').respond(function(method, url, data, headers) {
       var postData = angular.fromJson(data),
         newUser,
         errors = [];

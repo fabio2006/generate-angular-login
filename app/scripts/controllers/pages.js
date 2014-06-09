@@ -10,7 +10,7 @@ angular.module('organizationApp.pages', ['organizationApp.grandfather'])
       })
       .state('app.user', {
         url: '/user',
-        templateUrl: 'pages/user.tpl.html',
+        templateUrl: 'templates/user.tpl.html',
         accessLevel: accessLevels.user
       });
   });

@@ -83,11 +83,19 @@ body {
     }
 }
 
+.login-error {
+  height: 0;
+  overflow: hidden;
+  transition: height 1s;
+}
+.login-error.active {
+  height: 50px;
+}
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
     .container {
-        max-width: 730px;
+        max-width: 1400px;
     }
 
     /* Remove the padding we set earlier */
