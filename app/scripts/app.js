@@ -2,7 +2,7 @@
 
 angular.module('organizationApp', [
   // login service
-  'loginService',
+  'authenticationService',
   'organizationApp.mock',
   'organizationApp.directives',
   // different app sections
@@ -33,13 +33,13 @@ angular.module('organizationApp', [
     $rootScope.$on('$stateChangeError', resolveDone);
     $rootScope.$on('$statePermissionError', resolveDone);
   })
-  .controller('BodyController', function($scope, $state, $stateParams, loginService, $http, $timeout) {
+  .controller('BodyController', function($scope, $state, $stateParams, authenticationService, $http, $timeout) {
     // Expose $state and $stateParams to the <body> tag
     $scope.$state = $state;
     $scope.$stateParams = $stateParams;
 
-    // loginService exposed and a new Object containing login user/pwd
-    $scope.ls = loginService;
+    // authenticationService exposed and a new Object containing login user/pwd
+    $scope.ls = authenticationService;
     $scope.login = {
       working: false,
       wrong: false
@@ -50,7 +50,7 @@ angular.module('organizationApp', [
       $scope.login.working = true;
       $scope.login.wrong = false;
 
-      loginService.loginUser(loginPromise);
+      authenticationService.loginUser(loginPromise);
       loginPromise.error(function() {
         $scope.login.wrong = true;
         $timeout(function() {
@@ -63,6 +63,6 @@ angular.module('organizationApp', [
       });
     };
     $scope.logoutMe = function() {
-      loginService.logoutUser($http.get('/logout'));
+      authenticationService.logoutUser($http.get('/logout'));
     };
   });

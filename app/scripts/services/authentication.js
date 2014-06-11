@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('loginService', [])
-  .provider('loginService', function() {
+angular.module('authenticationService', [])
+  .provider('authenticationService', function() {
     var userToken = localStorage.getItem('userToken'),
       errorState = 'app.error',
       logoutState = 'app.home';
@@ -175,7 +175,7 @@ angular.module('loginService', [])
         logoutUser: function(httpPromise) {
           /**
            * De-registers the userToken remotely
-           * then clears the loginService as it was on startup
+           * then clears the authenticationService as it was on startup
            */
           setToken(null);
           this.userRole = userRoles.public;

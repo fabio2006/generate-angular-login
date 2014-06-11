@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('organizationApp.error', ['organizationApp.grandfather'])
+angular.module('organizationApp.error', ['organizationApp.security'])
   .config(function($stateProvider) {
     $stateProvider
       .state('app.error', {

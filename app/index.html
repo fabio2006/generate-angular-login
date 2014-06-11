@@ -52,7 +52,7 @@
               <a ui-sref="app.user">Registered-Only page</a>
             </li>
             <li ng-class="{ active: $state.is('app.register') }">
-              <a ui-sref="app.register">Register <i class="fa fa-user"></i>+</a>
+              <a ui-sref="app.register">Register <i class="glyphicon glyphicon-user"></i>+</a>
             </li>
           </ul>
           <!-- Right side of the navbar -->
@@ -68,7 +68,7 @@
           </form>
           <!-- Spinner -->
           <button class="btn btn-default navbar-btn navbar-right" ng-hide="ls.doneLoading">
-            <i class="fa fa-spinner fa-spin"></i>
+            <i class="glyphicon glyphicon-refresh"></i>
           </button>
           <!-- Logout Form -->
           <form class="navbar-form navbar-right" role="logout" ng-submit="logoutMe()" ng-show="ls.isLogged">
@@ -132,16 +132,14 @@
 
                 <!-- build:js({.tmp,app}) scripts/scripts.js -->
                 <script src="scripts/app.js"></script>
-                <script src="scripts/controllers/login.js"></script>
                 <script src="scripts/controllers/scroll.js"></script>
                 <script src="scripts/directives/whenscrolled.js"></script>
                 <script src="scripts/directives/form-helpers.js"></script>
-                <script src="scripts/services/api.js"></script>
-                <script src="scripts/services/login-service.js"></script>
+                <script src="scripts/services/authentication.js"></script>
+                <script src="scripts/services/roles.js"></script>
+                <script src="scripts/services/security.js"></script>
                 <script src="scripts/templates-app.js"></script>
-                <script src="scripts/grandfather.js"></script>
                 <script src="scripts/mockhttp.js"></script>
-                <script src="scripts/routing-config.js"></script>
                 <script src="scripts/controllers/error.js"></script>
                 <script src="scripts/controllers/pages.js"></script>
                 <script src="scripts/controllers/register.js"></script>

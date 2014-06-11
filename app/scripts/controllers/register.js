@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('organizationApp.register', ['organizationApp.grandfather'])
+angular.module('organizationApp.register', ['organizationApp.security'])
   .config(function($stateProvider) {
     $stateProvider
       .state('app.register', {

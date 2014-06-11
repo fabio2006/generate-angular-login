@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('organizationApp.pages', ['organizationApp.grandfather'])
+angular.module('organizationApp.pages', ['organizationApp.security'])
   .config(function($stateProvider) {
     $stateProvider
       .state('app.admin', {
